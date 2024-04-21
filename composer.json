@@ -10,6 +10,8 @@
         "ext-intl": "*",
         "ext-mbstring": "*",
         "ext-sqlite3": "*",
+        "doctrine/doctrine-migrations-bundle": "^3.3",
+        "easycorp/easyadmin-bundle": "^4.10",
         "symfony/console": "6.4.*",
         "symfony/dotenv": "6.4.*",
         "symfony/flex": "^2",
@@ -18,6 +20,8 @@
         "symfony/yaml": "6.4.*"
     },
     "require-dev": {
+        "symfony/debug-bundle": "^7.0",
+        "symfony/maker-bundle": "^1.58"
     },
     "config": {
         "allow-plugins": {
@@ -64,7 +68,8 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "6.4.*"
+            "require": "6.4.*",
+            "docker": false
         }
     }
 }
