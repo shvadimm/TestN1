@@ -19,11 +19,11 @@ class TimeSlot
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $date = null;
 
-    #[ORM\Column]
-    private ?int $duration = null;
-
     #[ORM\Column(type: Types::TIME_IMMUTABLE)]
     private ?\DateTimeImmutable $start_time = null;
+
+    #[ORM\Column]
+    private ?int $duration = null;
 
     /**
      * @var Collection<int, Reservation>
@@ -34,6 +34,23 @@ class TimeSlot
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
+    }
+
+    public function getTimeSummary() {
+        return sprintf("%s - %s (%dh)",
+            $this->start_time->format('H:i'),
+            ($this->duration + (int)$this->start_time->format('H')).':'.$this->start_time->format('i'),
+            $this->duration,
+        );
+    }
+
+    public function __toString() {
+        return sprintf("%s %s - %s (%dh)",
+            $this->date->format('d/m/Y'),
+            $this->start_time->format('H:i'),
+            ($this->duration + (int)$this->start_time->format('H')).':'.$this->start_time->format('i'),
+            $this->duration,
+        );
     }
 
     public function getId(): ?int
