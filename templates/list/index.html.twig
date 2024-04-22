@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des réservations{% endblock %}
+
+{% block main_title %}Réservations pour {{ fish.fishname }}{% endblock %}
+{% block content %}
+    <ul>
+        {% for reservation in reservations %}
+            <li>{{ reservation.timeSlot }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
