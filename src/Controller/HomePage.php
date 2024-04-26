@@ -14,7 +14,8 @@ class HomePage extends AbstractController
     public function __invoke(UrlGeneratorInterface $url)
     {
         $form_url = $url->generate('reservation_form');
-        $list_url = $url->generate('reservation_list', ['fishname' => 'Nemo']);
+        $list_url_nemo = $url->generate('reservation_list', ['fishname' => 'Nemo']);
+        $list_url_dory = $url->generate('reservation_list', ['fishname' => 'Dory']);
         return new Response(<<<HTML
 <!DOCTYPE html>
 <html>
@@ -48,7 +49,12 @@ class HomePage extends AbstractController
          </div>
          <div class="col-md-6">
            <p class="fs-4">Qui va là ?</p>
-           <a class="btn btn-outline-secondary btn-lg" href="$list_url">Voir mes réservations</a>
+           <div class="form-row">
+           <a class="btn btn-outline-secondary btn-lg" href="$list_url_nemo">Voir les réservations de Nemo</a>
+</div>
+           <div class="form-row">
+           <a class="btn btn-outline-secondary btn-lg" href="$list_url_dory">Voir les réservations de Dory</a>
+</div>
          </div>
        </div>
      </div>

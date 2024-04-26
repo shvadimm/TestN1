@@ -4,9 +4,21 @@
 
 {% block main_title %}Réservations pour {{ fish.fishname }}{% endblock %}
 {% block content %}
-    <ul>
+    <script>
+        function cancel(btn) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    document.reload();
+                }
+            };
+            xhttp.open("POST", btn.dataset['url'], true);
+            xhttp.send();
+        }
+    </script>
+    <ul class="list-group">
         {% for reservation in reservations %}
-            <li>{{ reservation.timeSlot }}</li>
+            <li class="list-group-item">{{ reservation.timeSlot }} <button class="float-end btn btn-sm btn-outline-danger" type="button" onclick="cancel(this)" data-url="{{ path('api_remove', {fishname: reservation.fish.fishname, id: reservation.id}) }})">Annuler</button></li>
         {% endfor %}
     </ul>
 {% endblock %}

@@ -20,6 +20,22 @@
 <body>
 {% block body %}
     <div class="container py-4">
+    {% block menu %}
+        <ul class="nav menu">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('homepage') }}">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('reservation_form') }}">Réserver</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('reservation_list', {fishname: 'Nemo'}) }}">Nemo</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('reservation_list', {fishname: 'Dory'}) }}">Dory</a>
+            </li>
+        </ul>
+    {% endblock %}
         <div class="p-5 mb-4 bg-body-tertiary rounded-3">
             <div class="container-fluid py-5">
                 <h1 class="display-5 fw-bold">{% block main_title %}{% endblock %}</h1>

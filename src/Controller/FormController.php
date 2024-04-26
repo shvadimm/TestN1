@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Reservation;
 use App\Form\ReservationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,12 +20,14 @@ class FormController extends AbstractController
         $form->add('Valider', SubmitType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Reservation $reservation */
             $reservation = $form->getData();
             $em->persist($reservation);
-            $this->redirectToRoute('homepage');
+            $em->flush();
+            $this->redirectToRoute('reservation_list', ['fishname' => $reservation->getFish()->getFishname()]);
         }
         return $this->render('form/index.html.twig', [
-            'form' => $form
+            'form' => $form->createView(),
         ]);
     }
 }
