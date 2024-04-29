@@ -20,10 +20,24 @@ Votre mission, si vous l'acceptez (c'est une formule, hein, vous n'avez pas vrai
     
 * De répondre aux questions suivantes :
   * Quelles sont les URLs que l'on peut visiter ? Que permettent-elles de faire ?
+
+              /# page d'acuille pour voir l'ensemble de site.
+              /list/nemo ou dory permete de voir des list de reservation les diferent utilisateur telle que nemo et dory
+              /form le form qui permette de faire le reservation
     * _Indices_ : cf. Controller et security.yaml
   * Que peut-on faire comme remarques sur la sécurité ?
+
+                la session et pas bien gere. 
+                le debug est active ? 
   * A quoi sert le fichier "var/data.db" ? Que peut-on en dire ?
-    * Avantages et inconvénients; pour quelle raison est-il en contrôle de sources sur ce projet ?
+   
+        C'est le fiche de SQLite il est utiliser pour stocker des données liées aux réservations stocke les informations telles que les réservations, les utilisateurs, les détails.
+
+ * Avantages et inconvénients; pour quelle raison est-il en contrôle de sources sur ce projet ?
+
+          Il est utilise pour ce projet car il est pas tres chargé et de ce la ca vien l'inconvéniens le SQLlite il est moins adapté aux charges de travail lourdes.
+         Contrairement à MySQL ou PostgreSQL qui ont un serveur de base de données distinct, SQLite stocke toute la base de données dans un seul fichier, ce qui le rend facile à déployer et à gérer.
+        
   * Quelle erreur le développeur a-t-il commise dans TimeSlot::getTimeSummary() ?
     * _Indice_ : La piscine est ouverte toute l'année, 24h/24, y compris fin mars et fin octobre.
 
