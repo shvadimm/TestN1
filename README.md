@@ -28,7 +28,7 @@ Votre mission, si vous l'acceptez (c'est une formule, hein, vous n'avez pas vrai
   * Que peut-on faire comme remarques sur la sécurité ?
 
                 la session est mal géré. 
-                le debug est actif ? 
+                le debug est actif.
   * A quoi sert le fichier "var/data.db" ? Que peut-on en dire ?
    
                 C'est la fiche de SQLite elle est utilisé pour stocker des données liées aux réservations stocke les informations telles que les réservations, les utilisateurs, et les détails.
@@ -41,10 +41,33 @@ Votre mission, si vous l'acceptez (c'est une formule, hein, vous n'avez pas vrai
   * Quelle erreur le développeur a-t-il commise dans TimeSlot::getTimeSummary() ?
     * _Indice_ : La piscine est ouverte toute l'année, 24h/24, y compris fin mars et fin octobre.
 
+               Dans la méthode getTimeSummary(), le développeur a fait une erreur en calculant l'heure de fin du créneau horaire. 
+               ($this->duration + (int)$this->start_time->format('H')).':'.$this->start_time->format('i')
+              Ici il essaie d'ajouter la durée du créneau horaire à l'heure de début du créneau pour obtenir l'heure de fin mais il ne tient pas compte du passage à un nouveau jour lorsque le créneau horaire dépasse minuit.
+              Par example le $this->start_time soit 23h00 et que la durée du créneau soit de 2 heures 23+2=25 ca ne vas pas valide le format d'heure 24 heures.
+              
+              correction:
+                  public function getTimeSummary() {
+                 // Cloner le temps de début pour éviter de modifier l'original
+               $endTime = clone $this->start_time;
+    
+                // Ajouter la durée au temps de début pour obtenir l'heure de fin
+                $endTime->add(new DateInterval('PT' . $this->duration . 'H'));
+    
+                // Formater les temps de début et de fin dans le format 'heure:minute'
+               return sprintf("%s - %s (%dh)",
+                  $this->start_time->format('H:i'), // Formatage du temps de début
+                  $endTime->format('H:i'), // Formatage du temps de fin
+                  $this->duration // Durée du créneau horaire
+              );
+          }
 * Effectuer (ou au moins décrire) des tâches de développement sur cette application :
   * une réécriture (refactorisation) d'une partie du code, sans modification fonctionnelle
     * _Indice_ : HomePage
   * une correction/modification très rapide
+         
+             je re organiser le contenu de la page de manière plus cohérente, avec une disposition en grille pour les différentes sections
+
    
 * Décrire brièvement quelles évolutions pourraient être faites sur cette application
 

@@ -13,6 +13,7 @@ class HomePage extends AbstractController
 {
     public function __invoke(UrlGeneratorInterface $url)
     {
+        // Générer les URL pour le formulaire de réservation et les listes de réservations
         $form_url = $url->generate('reservation_form');
         $list_url_nemo = $url->generate('reservation_list', ['fishname' => 'Nemo']);
         $list_url_dory = $url->generate('reservation_list', ['fishname' => 'Dory']);
@@ -32,38 +33,35 @@ class HomePage extends AbstractController
 </head>
 <body>
 <div class="container py-4">
-   <div class="p-5 mb-4 bg-body-tertiary rounded-3">
-     <div class="container-fluid py-5">
-       <h1 class="display-5 fw-bold">Bienvenue sur le site de réservation de Fish'n Pool</h1>
-       <p>
-         Cette application permettant aux poissons de réserver une plage horaire dans la piscine municipale.
-         (L'interface physique poisson-machine est hors-périmètre, après tout leurs nageoires leur servent bien à naviguer)
-       </p>
-       <p>
-         Le développeur ayant réalisé cette partie de l'application a été victime d'une ingestion de fugu mal préparé; sa place est devenue soudainement vacante.
-       </p>
-       <div class="row">
-         <div class="col-md-6">
-           <p class="fs-4">Haut les cœurs, et en avant les nageoires !</p>
-           <a class="btn btn-primary btn-lg" href="$form_url">Réserver une plage</a>
-         </div>
-         <div class="col-md-6">
-           <p class="fs-4">Qui va là ?</p>
-           <div class="form-row">
-           <a class="btn btn-outline-secondary btn-lg" href="$list_url_nemo">Voir les réservations de Nemo</a>
-</div>
-           <div class="form-row">
-           <a class="btn btn-outline-secondary btn-lg" href="$list_url_dory">Voir les réservations de Dory</a>
-</div>
-         </div>
-       </div>
-     </div>
-   </div>
+    <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <!-- Déplacement du titre et des paragraphes dans une colonne de la grille -->
+            <h1 class="display-5 fw-bold">Bienvenue sur le site de réservation de Fish'n Pool</h1>
+            <p>Cette application permet aux poissons de réserver une plage horaire dans la piscine municipale. L'interface physique poisson-machine est hors-périmètre, après tout leurs nageoires leur servent bien à naviguer.</p>
+            <p>Le développeur ayant réalisé cette partie de l'application a été victime d'une ingestion de fugu mal préparé ; sa place est devenue soudainement vacante.</p>
+            <p class="fs-4">Haut les cœurs, et en avant les nageoires !</p>
+            <a class="btn btn-primary btn-lg" href="$form_url">Réserver une plage</a>
+          </div>
+          <div class="col-md-6">
+            <!-- Modification de la disposition des boutons avec la classe "d-grid" -->
+            <p class="fs-4">Qui va là ?</p>
+            <div class="d-grid gap-2">
+              <!-- Ajout de marges inférieures pour les boutons -->
+              <a class="btn btn-outline-secondary btn-lg mb-2" href="$list_url_nemo">Voir les réservations de Nemo</a>
+              <a class="btn btn-outline-secondary btn-lg" href="$list_url_dory">Voir les réservations de Dory</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-   <footer class="pt-3 mt-4 text-body-secondary border-top">
-     © 2024
-   </footer>
-</div>
+    <!-- Ajout d'une classe "text-center" pour centrer le texte du pied de page -->
+    <footer class="pt-3 mt-4 text-body-secondary border-top text-center">
+      © 2024 Fish'n Pool
+    </footer>
+  </div>
 </body>
 </html>
 HTML);
